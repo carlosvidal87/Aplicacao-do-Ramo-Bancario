@@ -1,12 +1,7 @@
 import java.util.LinkedList;
-import java.util.List;
 
 public class Contas {
-    private LinkedList<ContaBancaria> contas;
-
-    public Contas() {
-        contas = new LinkedList<>();
-    }
+    private LinkedList<ContaBancaria> contas = new LinkedList<>();
 
     public ContaBancaria buscar(int numConta) {
         for (ContaBancaria conta : contas) {
@@ -17,13 +12,15 @@ public class Contas {
         return null;
     }
 
-    public List<ContaBancaria> getContas() {
-        return contas;
-    }
-
     public void creditoJuros() {
         for (ContaBancaria conta : contas) {
             conta.creditaJuros();
+        }
+    }
+
+    public void debitarTaxas() {
+        for (ContaBancaria conta : contas) {
+            conta.debitaTaxa();
         }
     }
 

@@ -15,20 +15,20 @@ public class ContaRentavel extends ContaBancaria {
 
     @Override
     public void debitaTaxa() {
-        if (retornaSaldo() < 400.0) {
-            debita(4.0);
+        if (saldo < 400.0) {
+            saldo -= 4.0;
         } else {
-            debita(2.0);
+            saldo -= 2.0;
         }
     }
 
     @Override
     public void creditaJuros() {
-        depositar(retornaSaldo() * taxaJuros);
+        saldo += saldo * taxaJuros;
     }
 
     @Override
     public String toString() {
-        return "Conta Rentável (Nº " + numConta + "): Saldo = R$" + retornaSaldo();
+        return "Conta Rentável - " + super.toString();
     }
 }

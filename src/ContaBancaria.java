@@ -1,7 +1,7 @@
 public abstract class ContaBancaria implements EmprestimoFinanciavel {
     private static int proxNumConta = 1;
-    public int numConta;
-    private double saldo;
+    protected int numConta;
+    protected double saldo;
 
     public ContaBancaria(double saldoInicial) {
         this.numConta = proxNumConta++;
@@ -20,7 +20,7 @@ public abstract class ContaBancaria implements EmprestimoFinanciavel {
         saldo += valor;
     }
 
-    public void debita(double valor) {
+    public void debitar(double valor) {
         saldo -= valor;
     }
 
@@ -32,9 +32,13 @@ public abstract class ContaBancaria implements EmprestimoFinanciavel {
 
     public abstract void creditaJuros();
 
-    public abstract String toString();
-
+    @Override
     public double valorEmprestimo() {
-        return 2 * saldo;
+        return saldo * 2;
+    }
+
+    @Override
+    public String toString() {
+        return "Conta: " + numConta + ", Saldo: R$" + saldo;
     }
 }

@@ -1,4 +1,4 @@
-public class ContaEspecial extends ContaBancaria {
+public class ContaEspecial extends ContaRentavel {
     private static double taxaJuros = 0.07;
 
     public ContaEspecial(double saldoInicial) {
@@ -15,16 +15,16 @@ public class ContaEspecial extends ContaBancaria {
 
     @Override
     public void debitaTaxa() {
-        debita(2.0);
+        saldo -= 2.0;
     }
 
     @Override
     public void creditaJuros() {
-        depositar(retornaSaldo() * taxaJuros);
+        saldo += saldo * taxaJuros;
     }
 
     @Override
     public String toString() {
-        return "Conta Especial (Nº " + numConta + "): Saldo = R$" + retornaSaldo();
+        return "Conta Especial - " + super.toString();
     }
 }

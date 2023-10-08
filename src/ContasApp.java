@@ -1,5 +1,4 @@
-import java.util.*;
-
+import java.util.Scanner;
 
 public class ContasApp {
     public static void main(String[] args) {
@@ -9,7 +8,7 @@ public class ContasApp {
         while (true) {
             System.out.println("Menu:");
             System.out.println("(1): Nova Conta Corrente");
-            System.out.println("(2): Nova Conta Rentável");
+            System.out.println("(2): Nova Conta Rentavel");
             System.out.println("(3): Nova Conta Especial");
             System.out.println("(4): Depositar");
             System.out.println("(5): Debitar");
@@ -20,88 +19,101 @@ public class ContasApp {
             System.out.println("(10): Valor para financiamento");
             System.out.println("(0): Sair");
             System.out.print("Opção: ");
-            
+
             int opcao = scanner.nextInt();
-            
+
             switch (opcao) {
                 case 1:
                     System.out.print("Digite o saldo inicial: ");
-                    double saldoCorrente = scanner.nextDouble();
-                    contas.adicionar(new ContaCorrente(saldoCorrente));
+                    double saldoCC = scanner.nextDouble();
+                    contas.adicionar(new ContaCorrente(saldoCC));
                     break;
+
                 case 2:
                     System.out.print("Digite o saldo inicial: ");
-                    double saldoRentavel = scanner.nextDouble();
-                    contas.adicionar(new ContaRentavel(saldoRentavel));
+                    double saldoCR = scanner.nextDouble();
+                    contas.adicionar(new ContaRentavel(saldoCR));
                     break;
+
                 case 3:
                     System.out.print("Digite o saldo inicial: ");
-                    double saldoEspecial = scanner.nextDouble();
-                    contas.adicionar(new ContaEspecial(saldoEspecial));
+                    double saldoCE = scanner.nextDouble();
+                    contas.adicionar(new ContaEspecial(saldoCE));
                     break;
+
                 case 4:
                     System.out.print("Digite o número da conta: ");
-                    int numDeposito = scanner.nextInt();
-                    ContaBancaria contaDeposito = contas.buscar(numDeposito);
+                    int numContaDeposito = scanner.nextInt();
+                    ContaBancaria contaDeposito = contas.buscar(numContaDeposito);
                     if (contaDeposito != null) {
-                        System.out.print("Digite o valor a ser depositado: ");
+                        System.out.print("Digite o valor do depósito: ");
                         double valorDeposito = scanner.nextDouble();
                         contaDeposito.depositar(valorDeposito);
+                        System.out.println("Depósito realizado com sucesso.");
                     } else {
                         System.out.println("Conta não encontrada.");
                     }
                     break;
+
                 case 5:
                     System.out.print("Digite o número da conta: ");
-                    int numDebito = scanner.nextInt();
-                    ContaBancaria contaDebito = contas.buscar(numDebito);
+                    int numContaDebito = scanner.nextInt();
+                    ContaBancaria contaDebito = contas.buscar(numContaDebito);
                     if (contaDebito != null) {
-                        System.out.print("Digite o valor a ser debitado: ");
+                        System.out.print("Digite o valor do débito: ");
                         double valorDebito = scanner.nextDouble();
-                        contaDebito.debita(valorDebito);
+                        contaDebito.debitar(valorDebito);
+                        System.out.println("Débito realizado com sucesso.");
                     } else {
                         System.out.println("Conta não encontrada.");
                     }
                     break;
+
                 case 6:
                     contas.creditoJuros();
+                    System.out.println("Juros creditados em todas as contas.");
                     break;
+
                 case 7:
-                    for (ContaBancaria conta : contas.getContas()) {
-                        conta.debitaTaxa();
-                    }
+                    contas.debitarTaxas();
+                    System.out.println("Taxas debitadas em todas as contas.");
                     break;
+
                 case 8:
                     System.out.print("Digite o número da conta: ");
-                    int numConta = scanner.nextInt();
-                    ContaBancaria contaBusca = contas.buscar(numConta);
+                    int numContaBusca = scanner.nextInt();
+                    ContaBancaria contaBusca = contas.buscar(numContaBusca);
                     if (contaBusca != null) {
                         System.out.println(contaBusca.toString());
                     } else {
                         System.out.println("Conta não encontrada.");
                     }
                     break;
+
                 case 9:
                     System.out.println(contas.toString());
                     break;
+
                 case 10:
                     System.out.print("Digite o número da conta: ");
-                    int numEmprestimo = scanner.nextInt();
-                    ContaBancaria contaEmprestimo = contas.buscar(numEmprestimo);
-                    if (contaEmprestimo != null) {
-                        double valorEmprestimo = contaEmprestimo.valorEmprestimo();
-                        System.out.println("O valor para financiamento da conta é R$" + valorEmprestimo);
+                    int numContaFinanciamento = scanner.nextInt();
+                    ContaBancaria contaFinanciamento = contas.buscar(numContaFinanciamento);
+                    if (contaFinanciamento != null) {
+                        double valorEmprestimo = contaFinanciamento.valorEmprestimo();
+                        System.out.println("Valor de empréstimo disponível: R$" + valorEmprestimo);
                     } else {
                         System.out.println("Conta não encontrada.");
                     }
                     break;
+
                 case 0:
-                    System.out.println("Encerrando o programa.");
+                    System.out.println("Saindo...");
                     scanner.close();
                     System.exit(0);
+                    break;
+
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
-                    break;
             }
         }
     }
